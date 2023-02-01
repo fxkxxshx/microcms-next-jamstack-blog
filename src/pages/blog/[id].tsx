@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 
 import { client } from '@/libs/client';
+import styles from '@/styles/BlogId.module.scss';
 import type { Blog } from '@/types/blog';
 
 type Props = {
@@ -39,13 +40,14 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 
 const BlogId: NextPage<Props> = ({ blog }) => {
   return (
-    <main>
-      <h1>{blog.title}</h1>
-      <p>{blog.publishedAt}</p>
+    <main className={styles.main}>
+      <h1 className={styles.title}>{blog.title}</h1>
+      <p className={styles.publishedAt}>{blog.publishedAt}</p>
       <div
         dangerouslySetInnerHTML={{
           __html: `${blog.body}`,
         }}
+        className={styles.post}
       />
     </main>
   );
